@@ -19,8 +19,8 @@ describe('Check-in Service', () => {
       title: 'The Best Gym',
       description: '',
       phone: '',
-      latitude: new Decimal(0),
-      longitude: new Decimal(0),
+      latitude: new Decimal(-23.6899759),
+      longitude: new Decimal(-46.7962328),
     })
 
     vi.useFakeTimers()
@@ -34,8 +34,8 @@ describe('Check-in Service', () => {
     const { checkIn } = await sut.execute({
       gymId: 'gym-01',
       userId: 'user-01',
-      userLatitude: -23.67488,
-      userLongitude: -46.7861504,
+      userLatitude: -23.6899759,
+      userLongitude: -46.7962328,
     })
 
     expect(checkIn.id).toEqual(expect.any(String))
@@ -47,16 +47,16 @@ describe('Check-in Service', () => {
     await sut.execute({
       gymId: 'gym-01',
       userId: 'user-01',
-      userLatitude: -23.67488,
-      userLongitude: -46.7861504,
+      userLatitude: -23.6899759,
+      userLongitude: -46.7962328,
     })
 
     await expect(() =>
       sut.execute({
         gymId: 'gym-01',
         userId: 'user-01',
-        userLatitude: -23.67488,
-        userLongitude: -46.7861504,
+        userLatitude: -23.6899759,
+        userLongitude: -46.7962328,
       }),
     ).rejects.toBeInstanceOf(Error)
   })
@@ -67,8 +67,8 @@ describe('Check-in Service', () => {
     await sut.execute({
       gymId: 'gym-01',
       userId: 'user-01',
-      userLatitude: -23.67488,
-      userLongitude: -46.7861504,
+      userLatitude: -23.6899759,
+      userLongitude: -46.7962328,
     })
 
     vi.setSystemTime(new Date(2022, 0, 21, 8, 0, 0))
@@ -76,10 +76,30 @@ describe('Check-in Service', () => {
     const { checkIn } = await sut.execute({
       gymId: 'gym-01',
       userId: 'user-01',
-      userLatitude: -23.67488,
-      userLongitude: -46.7861504,
+      userLatitude: -23.6899759,
+      userLongitude: -46.7962328,
     })
 
     expect(checkIn.id).toEqual(expect.any(String))
+  })
+
+  it('should not be able to check in on distant gym', async () => {
+    gymsRepository.items.push({
+      id: 'gym-02',
+      title: 'Panobianco Gym',
+      description: '',
+      phone: '',
+      latitude: new Decimal(-23.4643675),
+      longitude: new Decimal(-46.5213309),
+    })
+
+    await expect(() =>
+      sut.execute({
+        gymId: 'gym-02',
+        userId: 'user-01',
+        userLatitude: -23.6899759,
+        userLongitude: -46.7962328,
+      }),
+    ).rejects.toBeInstanceOf(Error)
   })
 })
