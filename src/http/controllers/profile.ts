@@ -1,20 +1,9 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 
 export async function profile(request: FastifyRequest, reply: FastifyReply) {
-  // try {
-  //   const authenticateService = makeAuthenticateService()
+  await request.jwtVerify()
 
-  //   await authenticateService.execute({
-  //     email,
-  //     password,
-  //   })
-  // } catch (error) {
-  //   if (error instanceof InvalidCredentialsError) {
-  //     return reply.status(400).send({ message: error.message })
-  //   }
-
-  //   throw error
-  // }
+  console.log(request.user.sub)
 
   return reply.status(200).send()
 }
