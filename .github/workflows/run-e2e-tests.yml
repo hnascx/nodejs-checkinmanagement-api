@@ -13,9 +13,9 @@ jobs:
         ports:
           - 5432:5432
         env:
-          - POSTGRES_USERNAME=docker
-          - POSTGRES_PASSWORD=docker
-          - POSTGRES_DATABASE=apigymcheckins
+          POSTGRES_USERNAME: docker
+          POSTGRES_PASSWORD: docker
+          POSTGRES_DATABASE: apigymcheckins
 
     steps:
       - uses: actions/checkout@v3
