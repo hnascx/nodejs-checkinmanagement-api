@@ -1,4 +1,4 @@
-# Node.js CheckIn Management API
+# Node.js Check-in Management API
 
 Gympass-style application for managing gyms, check-ins, and users.
 
