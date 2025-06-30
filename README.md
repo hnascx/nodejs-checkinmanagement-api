@@ -1,4 +1,4 @@
-# Node.js Checkin Management API
+# Node.js CheckIn Management API
 
 Gympass-style application for managing gyms, check-ins, and users.
 
@@ -171,3 +171,5 @@ See payload and response examples in the test files under `src/http/controllers/
 - Unit and end-to-end tests with [Vitest](https://vitest.dev/)
 - Test coverage: `npm run test:coverage`
 - E2E tests use an isolated database (see `prisma/vitest-environment-prisma` folder)
+
+---
